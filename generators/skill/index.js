@@ -46,6 +46,12 @@ module.exports = class extends Generator {
         type    : 'input',
         name    : 'skillName',
         message : 'Skill name',
+        validate: function(input) {
+           if (input === '') {
+               return "Valid name required.";
+           }
+           return true;
+        }
       }, {
         type    : 'list',
         name    : 'technology',
