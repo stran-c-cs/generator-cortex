@@ -41,37 +41,43 @@ const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
 
-    prompting() {
-      return this.prompt([
-      {
-        type    : 'list',
-        name    : 'connType',
-        message : 'Connection Type',
-        choices : displayStrings(connTypes),
-        default : 0
-      },
-      {
-        type    : 'input',
-        name    : 'connName',
-        message : 'Connection Name'
-      },
-      {
-        type    : 'input',
-        name    : 'connTitle',
-        message : 'Title'
-      },
-      {
-        type    : 'input',
-        name    : 'uri',
-        message : 'Connetion URI'
-      }]).then((answers) => {
+    initializing() {
         this.options.projectName   = this.config.get('projectName');
         this.options.projectPrefix = this.config.get('projectPrefix');
-        this.options.connType      = answers.connType;
-        this.options.connName      = answers.connName;
-        this.options.connTitle     = answers.connTitle.trim();
-        this.options.uri           = answers.uri;
-      });
+    }
+
+    prompting() {
+        if (this.options.i) {
+            return
+        }
+        return this.prompt([
+            {
+                type    : 'list',
+                name    : 'connType',
+                message : 'Connection Type',
+                choices : displayStrings(connTypes),
+                default : 0
+            },
+            {
+                type    : 'input',
+                name    : 'connName',
+                message : 'Connection Name'
+            },
+            {
+                type    : 'input',
+                name    : 'connTitle',
+                message : 'Title'
+            },
+            {
+                type    : 'input',
+                name    : 'uri',
+                message : 'Connetion URI'
+            }]).then((answers) => {
+            this.options.connType      = answers.connType;
+            this.options.connName      = answers.connName;
+            this.options.connTitle     = answers.connTitle.trim();
+            this.options.uri           = answers.uri;
+        });
     }
 
     writing() {
