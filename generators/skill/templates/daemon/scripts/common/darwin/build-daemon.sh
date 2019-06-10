@@ -6,7 +6,6 @@ VERSION="1.0.0-SNAPSHOT"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 IMAGE_NAME="<%= projectPrefix %><%= skillName %>"
 PRIVATE_REGISTRY=<%= privateRegistry %>
-
 echo $IMAGE_NAME
 
 echo "Cleaning $SCRIPT_DIR/build"

@@ -16,6 +16,7 @@
 
 'use strict';
 
+const Config = require('../client/config');
 const path = require('path');
 
 const technologies = [
@@ -44,7 +45,13 @@ const Generator = require('yeoman-generator');
 module.exports = class extends Generator {
 
     initializing() {
+      
+        const profileName = this.options.cortexProfile || 'default';
+        const config = Config.readConfig();
+        const profile = (config && config.getProfile(profileName)) || {};
+
         this.options.projectName   = this.config.get('projectName');
+        this.options.tenant = profile.account
         if(this.config.get('projectPrefix'))
             this.options.projectPrefix = this.config.get('projectPrefix')+'/';
         else
